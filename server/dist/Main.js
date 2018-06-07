@@ -32994,6 +32994,9 @@ var _mpizenberg$demo_elm_image_annotation$StyleSheet$Viewer = {ctor: 'Viewer'};
 var _mpizenberg$demo_elm_image_annotation$StyleSheet$ClassItem = function (a) {
 	return {ctor: 'ClassItem', _0: a};
 };
+var _mpizenberg$demo_elm_image_annotation$StyleSheet$Instruction = function (a) {
+	return {ctor: 'Instruction', _0: a};
+};
 var _mpizenberg$demo_elm_image_annotation$StyleSheet$ClassesSidebar = {ctor: 'ClassesSidebar'};
 var _mpizenberg$demo_elm_image_annotation$StyleSheet$TextButton = function (a) {
 	return {ctor: 'TextButton', _0: a};
@@ -33080,6 +33083,8 @@ var _mpizenberg$demo_elm_image_annotation$StyleSheet$colorVariations = function 
 		}
 	};
 }();
+var _mpizenberg$demo_elm_image_annotation$StyleSheet$Paragraph = {ctor: 'Paragraph'};
+var _mpizenberg$demo_elm_image_annotation$StyleSheet$Title = {ctor: 'Title'};
 var _mpizenberg$demo_elm_image_annotation$StyleSheet$sheet = _mdgriffith$style_elements$Style$styleSheet(
 	{
 		ctor: '::',
@@ -33231,7 +33236,36 @@ var _mpizenberg$demo_elm_image_annotation$StyleSheet$sheet = _mdgriffith$style_e
 															_0: _mdgriffith$style_elements$Style_Color$background(_elm_lang$core$Color$grey),
 															_1: _mpizenberg$demo_elm_image_annotation$StyleSheet$classesCommonStyles
 														}),
-													_1: {ctor: '[]'}
+													_1: {
+														ctor: '::',
+														_0: A2(
+															_mdgriffith$style_elements$Style$style,
+															_mpizenberg$demo_elm_image_annotation$StyleSheet$Instruction(_mpizenberg$demo_elm_image_annotation$StyleSheet$Title),
+															{
+																ctor: '::',
+																_0: _mdgriffith$style_elements$Style_Color$background(
+																	A4(_elm_lang$core$Color$rgba, 255, 255, 255, 0.8)),
+																_1: {
+																	ctor: '::',
+																	_0: _mdgriffith$style_elements$Style_Color$text(_elm_lang$core$Color$black),
+																	_1: {
+																		ctor: '::',
+																		_0: _mdgriffith$style_elements$Style_Font$typeface(
+																			{
+																				ctor: '::',
+																				_0: _mdgriffith$style_elements$Style_Font$cursive,
+																				_1: {ctor: '[]'}
+																			}),
+																		_1: {
+																			ctor: '::',
+																			_0: _mdgriffith$style_elements$Style_Font$size(40),
+																			_1: _mpizenberg$demo_elm_image_annotation$StyleSheet$preventCommon
+																		}
+																	}
+																}
+															}),
+														_1: {ctor: '[]'}
+													}
 												}
 											}
 										}
@@ -35784,6 +35818,38 @@ var _mpizenberg$demo_elm_image_annotation$View_Main$datasetRawSideBar = F2(
 			},
 			A2(_mpizenberg$demo_elm_image_annotation$View_DatasetSideBar$viewRaw, selectImageMsg, images));
 	});
+var _mpizenberg$demo_elm_image_annotation$View_Main$exampleText2 = function () {
+	var paragraphe = 'Ceci est un autre titre';
+	return A3(
+		_mdgriffith$style_elements$Element$el,
+		_mpizenberg$demo_elm_image_annotation$StyleSheet$Instruction(_mpizenberg$demo_elm_image_annotation$StyleSheet$Title),
+		{
+			ctor: '::',
+			_0: _mdgriffith$style_elements$Element_Attributes$alignLeft,
+			_1: {
+				ctor: '::',
+				_0: _mdgriffith$style_elements$Element_Attributes$paddingTop(40),
+				_1: {ctor: '[]'}
+			}
+		},
+		_mdgriffith$style_elements$Element$text(paragraphe));
+}();
+var _mpizenberg$demo_elm_image_annotation$View_Main$exampleText = function () {
+	var paragraphe = 'Ceci est un titre\n';
+	return A3(
+		_mdgriffith$style_elements$Element$el,
+		_mpizenberg$demo_elm_image_annotation$StyleSheet$Instruction(_mpizenberg$demo_elm_image_annotation$StyleSheet$Title),
+		{
+			ctor: '::',
+			_0: _mdgriffith$style_elements$Element_Attributes$alignLeft,
+			_1: {
+				ctor: '::',
+				_0: _mdgriffith$style_elements$Element_Attributes$paddingTop(10),
+				_1: {ctor: '[]'}
+			}
+		},
+		_mdgriffith$style_elements$Element$text(paragraphe));
+}();
 var _mpizenberg$demo_elm_image_annotation$View_Main$viewAll = F5(
 	function (params, tools, viewer, _p8, annotatedImages) {
 		var _p9 = _p8;
@@ -35811,10 +35877,21 @@ var _mpizenberg$demo_elm_image_annotation$View_Main$viewAll = F5(
 							_mdgriffith$style_elements$Element$below,
 							{
 								ctor: '::',
-								_0: A2(_mpizenberg$demo_elm_image_annotation$View_Main$classesSideBar, params.selectClassMsg, _p9),
-								_1: {ctor: '[]'}
+								_0: _mpizenberg$demo_elm_image_annotation$View_Main$exampleText,
+								_1: {
+									ctor: '::',
+									_0: _mpizenberg$demo_elm_image_annotation$View_Main$exampleText2,
+									_1: {ctor: '[]'}
+								}
 							},
-							A2(_mpizenberg$demo_elm_image_annotation$View_ActionBar$viewAll, params.actionBar, tools))),
+							A2(
+								_mdgriffith$style_elements$Element$below,
+								{
+									ctor: '::',
+									_0: A2(_mpizenberg$demo_elm_image_annotation$View_Main$classesSideBar, params.selectClassMsg, _p9),
+									_1: {ctor: '[]'}
+								},
+								A2(_mpizenberg$demo_elm_image_annotation$View_ActionBar$viewAll, params.actionBar, tools)))),
 					_1: {
 						ctor: '::',
 						_0: A3(

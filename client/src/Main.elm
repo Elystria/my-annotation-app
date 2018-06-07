@@ -153,7 +153,7 @@ init flags =
                     , dragState = Pointer.NoDrag
                     }
     in
-    ( model, Cmd.none )
+        ( model, Cmd.none )
 
 
 importFlagsImages : List Image -> State
@@ -174,8 +174,8 @@ importFlagsImages images =
                     otherImages
                         |> List.indexedMap (\id img -> toRaw (id + 1) img)
             in
-            Zipper.init [] firstRawImage otherRawImages
-                |> ImagesProvided
+                Zipper.init [] firstRawImage otherRawImages
+                    |> ImagesProvided
 
 
 view : Model -> Html Msg
@@ -207,11 +207,11 @@ update msg model =
                 viewer =
                     Viewer.setSize viewerSize model.viewer
             in
-            ( { model | viewParameters = viewParameters, viewer = viewer }
-                |> fitImage
-                |> updateAnnotationsWithImage
-            , Cmd.none
-            )
+                ( { model | viewParameters = viewParameters, viewer = viewer }
+                    |> fitImage
+                    |> updateAnnotationsWithImage
+                , Cmd.none
+                )
 
         ( SelectImage imageId, ImagesProvided rawImages ) ->
             ( { model | state = ImagesProvided (Zipper.goTo .id imageId rawImages) }
@@ -224,9 +224,9 @@ update msg model =
                 newImages =
                     Zipper.goTo .id imageId images
             in
-            { model | state = AllProvided config classes tools newImages }
-                |> fitImage
-                |> update (SelectTool (.id <| Zipper.getC tools))
+                { model | state = AllProvided config classes tools newImages }
+                    |> fitImage
+                    |> update (SelectTool (.id <| Zipper.getC tools))
 
         ( SelectClass id, ConfigProvided config classes tools ) ->
             ( { model | state = ConfigProvided config { classes | selected = id } tools }
@@ -259,13 +259,13 @@ update msg model =
                 viewParameters =
                     View.markHasAnnotation hasAnnotations model.viewParameters
             in
-            ( { model
-                | state = newState
-                , viewParameters = viewParameters
-              }
-                |> updateAnnotationsWithImage
-            , Cmd.none
-            )
+                ( { model
+                    | state = newState
+                    , viewParameters = viewParameters
+                  }
+                    |> updateAnnotationsWithImage
+                , Cmd.none
+                )
 
         ( PointerMsg pointerMsg, AllProvided config classes tools imgs ) ->
             case .type_ (Zipper.getC tools) of
@@ -274,10 +274,10 @@ update msg model =
                         ( newViewer, newDragState, hasChanged ) =
                             updateMove pointerMsg model.dragState model.viewer
                     in
-                    if hasChanged then
-                        ( { model | viewer = newViewer, dragState = newDragState }, Cmd.none )
-                    else
-                        ( model, Cmd.none )
+                        if hasChanged then
+                            ( { model | viewer = newViewer, dragState = newDragState }, Cmd.none )
+                        else
+                            ( model, Cmd.none )
 
                 _ ->
                     let
@@ -301,17 +301,17 @@ update msg model =
                         viewParameters =
                             View.markHasAnnotation hasAnnotations model.viewParameters
                     in
-                    if hasChanged then
-                        ( { model
-                            | dragState = newDragState
-                            , state = AllProvided config classes tools (Zipper.setC newImg imgs)
-                            , viewParameters = viewParameters
-                          }
-                            |> updateAnnotationsWithImage
-                        , Cmd.none
-                        )
-                    else
-                        ( model, Cmd.none )
+                        if hasChanged then
+                            ( { model
+                                | dragState = newDragState
+                                , state = AllProvided config classes tools (Zipper.setC newImg imgs)
+                                , viewParameters = viewParameters
+                              }
+                                |> updateAnnotationsWithImage
+                            , Cmd.none
+                            )
+                        else
+                            ( model, Cmd.none )
 
         ( ZoomMsg zoomMsg, _ ) ->
             ( updateZoom zoomMsg model |> updateAnnotationsWithImage, Cmd.none )
@@ -330,10 +330,10 @@ update msg model =
                 viewParameters =
                     View.markHasAnnotation hasAnnotations model.viewParameters
             in
-            ( { model | state = newState, viewParameters = viewParameters }
-                |> updateAnnotationsWithImage
-            , Cmd.none
-            )
+                ( { model | state = newState, viewParameters = viewParameters }
+                    |> updateAnnotationsWithImage
+                , Cmd.none
+                )
 
         ( LoadImages (f :: files), NothingProvided ) ->
             let
@@ -343,9 +343,9 @@ update msg model =
                 ( otherImages, otherCmds ) =
                     prepareRawLoading 1 files
             in
-            ( { model | state = ImagesProvided (Zipper.init [] firstImage otherImages) }
-            , Cmd.batch (firstCmd :: otherCmds)
-            )
+                ( { model | state = ImagesProvided (Zipper.init [] firstImage otherImages) }
+                , Cmd.batch (firstCmd :: otherCmds)
+                )
 
         ( LoadImages (f :: files), ConfigProvided config classes tools ) ->
             let
@@ -360,10 +360,10 @@ update msg model =
                         (AnnotatedImage.fromRaw tools firstImage)
                         (List.map (AnnotatedImage.fromRaw tools) otherImages)
             in
-            ( { model | state = AllProvided config classes tools annotatedImages }
-                |> updateAnnotationsWithImage
-            , Cmd.batch (firstCmd :: otherCmds)
-            )
+                ( { model | state = AllProvided config classes tools annotatedImages }
+                    |> updateAnnotationsWithImage
+                , Cmd.batch (firstCmd :: otherCmds)
+                )
 
         ( LoadImages files, ImagesProvided previousImages ) ->
             let
@@ -373,9 +373,9 @@ update msg model =
                 ( newImages, cmds ) =
                     prepareRawLoading startingId files
             in
-            ( { model | state = ImagesProvided (Zipper.append newImages previousImages) }
-            , Cmd.batch cmds
-            )
+                ( { model | state = ImagesProvided (Zipper.append newImages previousImages) }
+                , Cmd.batch cmds
+                )
 
         ( LoadImages files, AllProvided config classes tools previousImages ) ->
             let
@@ -388,10 +388,10 @@ update msg model =
                 newAnnotatedImages =
                     List.map (AnnotatedImage.fromRaw tools) newImages
             in
-            ( { model | state = AllProvided config classes tools (Zipper.append newAnnotatedImages previousImages) }
-                |> updateAnnotationsWithImage
-            , Cmd.batch cmds
-            )
+                ( { model | state = AllProvided config classes tools (Zipper.append newAnnotatedImages previousImages) }
+                    |> updateAnnotationsWithImage
+                , Cmd.batch cmds
+                )
 
         ( ImageLoaded { id, url, width, height }, ImagesProvided images ) ->
             let
@@ -401,16 +401,16 @@ update msg model =
                 newStatus =
                     RawImage.Loaded (Image url width height)
             in
-            if id == img.id then
-                Zipper.setC { img | status = newStatus } images
-                    |> ImagesProvided
-                    |> (\state -> ( fitImage { model | state = state }, Cmd.none ))
-            else
-                Zipper.goTo .id id images
-                    |> Zipper.updateC (\img -> { img | status = newStatus })
-                    |> Zipper.goTo .id img.id
-                    |> ImagesProvided
-                    |> (\state -> ( { model | state = state }, Cmd.none ))
+                if id == img.id then
+                    Zipper.setC { img | status = newStatus } images
+                        |> ImagesProvided
+                        |> (\state -> ( fitImage { model | state = state }, Cmd.none ))
+                else
+                    Zipper.goTo .id id images
+                        |> Zipper.updateC (\img -> { img | status = newStatus })
+                        |> Zipper.goTo .id img.id
+                        |> ImagesProvided
+                        |> (\state -> ( { model | state = state }, Cmd.none ))
 
         ( ImageLoaded { id, url, width, height }, AllProvided config classes tools images ) ->
             let
@@ -421,18 +421,18 @@ update msg model =
                     AnnotatedImage.Loaded (Image url width height)
                         (AnnotatedImage.annotationsFromTools tools)
             in
-            if id == img.id then
-                Zipper.setC { img | status = newStatus } images
-                    |> AllProvided config classes tools
-                    |> (\state -> fitImage { model | state = state })
-                    |> updateAnnotationsWithImage
-                    |> (\model -> ( model, Cmd.none ))
-            else
-                Zipper.goTo .id id images
-                    |> Zipper.updateC (\img -> { img | status = newStatus })
-                    |> Zipper.goTo .id img.id
-                    |> AllProvided config classes tools
-                    |> (\state -> ( { model | state = state }, Cmd.none ))
+                if id == img.id then
+                    Zipper.setC { img | status = newStatus } images
+                        |> AllProvided config classes tools
+                        |> (\state -> fitImage { model | state = state })
+                        |> updateAnnotationsWithImage
+                        |> (\model -> ( model, Cmd.none ))
+                else
+                    Zipper.goTo .id id images
+                        |> Zipper.updateC (\img -> { img | status = newStatus })
+                        |> Zipper.goTo .id img.id
+                        |> AllProvided config classes tools
+                        |> (\state -> ( { model | state = state }, Cmd.none ))
 
         ( LoadConfig jsValue, _ ) ->
             ( model, Ports.loadConfigFile jsValue )
@@ -487,17 +487,17 @@ changeConfig configString state =
         ( config, classes, tools ) =
             decodeConfig configString
     in
-    case state of
-        ImagesProvided images ->
-            Zipper.mapAll (AnnotatedImage.fromRaw tools) images
-                |> AllProvided config classes tools
+        case state of
+            ImagesProvided images ->
+                Zipper.mapAll (AnnotatedImage.fromRaw tools) images
+                    |> AllProvided config classes tools
 
-        AllProvided _ _ _ images ->
-            Zipper.mapAll (AnnotatedImage.resetWithTools tools) images
-                |> AllProvided config classes tools
+            AllProvided _ _ _ images ->
+                Zipper.mapAll (AnnotatedImage.resetWithTools tools) images
+                    |> AllProvided config classes tools
 
-        _ ->
-            ConfigProvided config classes tools
+            _ ->
+                ConfigProvided config classes tools
 
 
 decodeConfig : String -> ( Config, { selected : Int, all : StaticTreeMap String }, Zipper Tool )
@@ -513,10 +513,10 @@ decodeConfig configString =
             else
                 1
     in
-    ( config
-    , { selected = selected, all = Config.classesFrom config.classes }
-    , Config.toolsFrom config.annotations
-    )
+        ( config
+        , { selected = selected, all = Config.classesFrom config.classes }
+        , Config.toolsFrom config.annotations
+        )
 
 
 
@@ -532,8 +532,8 @@ prepareRawLoading startId images =
         ids =
             List.range startId (startId + nbImages)
     in
-    List.map2 prepareOneRawLoading ids images
-        |> List.unzip
+        List.map2 prepareOneRawLoading ids images
+            |> List.unzip
 
 
 prepareOneRawLoading : Int -> { name : String, file : Value } -> ( RawImage, Cmd Msg )
@@ -598,7 +598,7 @@ updateMove pointerMsg dragState viewer =
                 movement =
                     Viewer.sizeIn viewer ( x - ox, y - oy )
             in
-            ( Viewer.grabMove movement viewer, Pointer.DraggingFrom ( x, y ), True )
+                ( Viewer.grabMove movement viewer, Pointer.DraggingFrom ( x, y ), True )
 
         ( Pointer.UpAt _, _ ) ->
             ( viewer, Pointer.NoDrag, True )
@@ -619,10 +619,10 @@ encode config images =
                 |> List.indexedMap (\id ann -> ( id + 1, ann ))
                 |> Dict.fromList
     in
-    Encode.object
-        [ ( "config", Config.encode config )
-        , ( "images", Encode.list <| List.map (AnnotatedImage.encode annotationsDict) images )
-        ]
+        Encode.object
+            [ ( "config", Config.encode config )
+            , ( "images", Encode.list <| List.map (AnnotatedImage.encode annotationsDict) images )
+            ]
 
 
 

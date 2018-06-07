@@ -10,6 +10,7 @@ module StyleSheet
         , ColorVariations(..)
         , Style(..)
         , sheet
+        , TypeText(..)
         )
 
 import Annotation.Color as Color
@@ -17,6 +18,7 @@ import Color
 import Style exposing (StyleSheet)
 import Style.Color as Color
 import Style.Font as Font
+import Element exposing (layout, row, empty, text, link)
 
 
 type Style
@@ -24,6 +26,7 @@ type Style
     | Button ButtonState
     | TextButton ButtonState
     | ClassesSidebar
+    | Instruction TypeText --Attribute
     | ClassItem ClassState
     | Viewer
     | ToolIcon
@@ -42,6 +45,18 @@ type ClassState
 
 type ColorVariations
     = FromPalette Int
+
+
+type TypeText
+    = Title
+    | Paragraph
+
+
+
+{--type Attribute
+    = BG
+    | Color
+    | Font --}
 
 
 sheet : StyleSheet Style ColorVariations
@@ -89,6 +104,14 @@ sheet =
         , Style.style (ClassItem SelectedClass) <|
             Color.background Color.grey
                 :: classesCommonStyles
+
+        -- Text SideBar
+        , Style.style (Instruction Title) <|
+            Color.background (Color.rgba 255 255 255 0.8)
+                :: Color.text Color.black
+                :: Font.typeface [ Font.cursive ]
+                :: Font.size 40
+                :: preventCommon
         ]
 
 
@@ -124,3 +147,11 @@ noUserSelect =
     , Style.prop "-moz-user-select" "none"
     , Style.prop "-ms-user-select" "none"
     ]
+
+
+
+-- Paragraphes formates
+{--paragraph MonPremierStyle []
+        [Element.text "voilà un text",
+        Element.el Bold [] (text) "this is bold"),
+        text "lots of text..."] --}

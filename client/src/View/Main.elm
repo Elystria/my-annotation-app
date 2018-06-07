@@ -84,9 +84,49 @@ viewAll params tools viewer ({ selected, all } as classes) annotatedImages =
             [ Attributes.height fill ]
             [ ActionBar.viewAll params.actionBar tools
                 |> Element.below [ classesSideBar params.selectClassMsg classes ]
+                |> Element.below [ exampleText, exampleText2 ]
                 |> Element.below [ datasetAnnotatedSideBar params.selectImageMsg annotatedImages ]
             , AnnotationsArea.view params.annotationsArea viewer (Zipper.getC annotatedImages)
             ]
+
+
+exampleText : Element Style var msg
+
+
+
+{--exampleText =
+    let
+        textConsigne1 =
+            "Insérer le text ici"
+
+        textConsigne2 =
+            " Insérer l'autre texte ici"
+    in
+        Element.text
+            (textConsigne1
+                ++ textConsigne2
+            )
+            |> Element.el (Style.ClassItem Style.NonSelectedClass) [ alignLeft, paddingTop 10 ]
+
+                --}
+
+
+exampleText =
+    let
+        paragraphe =
+            "Ceci est un titre\n"
+    in
+        Element.text paragraphe
+            |> Element.el (Style.Instruction Style.Title) [ alignLeft, paddingTop 10 ]
+
+
+exampleText2 =
+    let
+        paragraphe =
+            "Ceci est un autre titre"
+    in
+        Element.text paragraphe
+            |> Element.el (Style.Instruction Style.Title) [ alignLeft, paddingTop 40 ]
 
 
 
@@ -136,9 +176,9 @@ pageLayout device =
             , max 0 (toFloat device.size.height - barHeight)
             )
     in
-    { actionBarSize = ( barWidth, barHeight )
-    , viewerSize = ( viewerWidth, viewerHeight )
-    }
+        { actionBarSize = ( barWidth, barHeight )
+        , viewerSize = ( viewerWidth, viewerHeight )
+        }
 
 
 updateLayout : Device.Size -> Parameters msg -> ( Parameters msg, ( Float, Float ) )
@@ -159,9 +199,9 @@ updateLayout size params =
         annotationsArea =
             updateSize layout.viewerSize params.annotationsArea
     in
-    ( { params | device = device, actionBar = actionBar, annotationsArea = annotationsArea }
-    , layout.viewerSize
-    )
+        ( { params | device = device, actionBar = actionBar, annotationsArea = annotationsArea }
+        , layout.viewerSize
+        )
 
 
 updateAnnotationsWithImage : Float -> Image -> Int -> Zipper { toolId : Int, annotations : Annotations } -> Parameters msg -> Parameters msg
@@ -170,4 +210,4 @@ updateAnnotationsWithImage zoom image selectedClassId annotations ({ annotations
         newAnnotationsWithImage =
             AnnotationsArea.annotationsWithImage zoom image selectedClassId annotations
     in
-    { params | annotationsArea = { annotationsArea | annotationsWithImage = Just newAnnotationsWithImage } }
+        { params | annotationsArea = { annotationsArea | annotationsWithImage = Just newAnnotationsWithImage } }
