@@ -117,6 +117,38 @@ var _mpizenberg$demo_elm_image_annotation$View_Main$datasetRawSideBar = F2(
 			},
 			A2(_mpizenberg$demo_elm_image_annotation$View_DatasetSideBar$viewRaw, selectImageMsg, images));
 	});
+var _mpizenberg$demo_elm_image_annotation$View_Main$exampleText2 = function () {
+	var paragraphe = 'Ceci est un autre titre';
+	return A3(
+		_mdgriffith$style_elements$Element$el,
+		_mpizenberg$demo_elm_image_annotation$StyleSheet$Instruction(_mpizenberg$demo_elm_image_annotation$StyleSheet$Title),
+		{
+			ctor: '::',
+			_0: _mdgriffith$style_elements$Element_Attributes$alignLeft,
+			_1: {
+				ctor: '::',
+				_0: _mdgriffith$style_elements$Element_Attributes$paddingTop(40),
+				_1: {ctor: '[]'}
+			}
+		},
+		_mdgriffith$style_elements$Element$text(paragraphe));
+}();
+var _mpizenberg$demo_elm_image_annotation$View_Main$exampleText = function () {
+	var paragraphe = 'Ceci est un titre\n';
+	return A3(
+		_mdgriffith$style_elements$Element$el,
+		_mpizenberg$demo_elm_image_annotation$StyleSheet$Instruction(_mpizenberg$demo_elm_image_annotation$StyleSheet$Title),
+		{
+			ctor: '::',
+			_0: _mdgriffith$style_elements$Element_Attributes$alignLeft,
+			_1: {
+				ctor: '::',
+				_0: _mdgriffith$style_elements$Element_Attributes$paddingTop(10),
+				_1: {ctor: '[]'}
+			}
+		},
+		_mdgriffith$style_elements$Element$text(paragraphe));
+}();
 var _mpizenberg$demo_elm_image_annotation$View_Main$viewAll = F5(
 	function (params, tools, viewer, _p8, annotatedImages) {
 		var _p9 = _p8;
@@ -144,10 +176,21 @@ var _mpizenberg$demo_elm_image_annotation$View_Main$viewAll = F5(
 							_mdgriffith$style_elements$Element$below,
 							{
 								ctor: '::',
-								_0: A2(_mpizenberg$demo_elm_image_annotation$View_Main$classesSideBar, params.selectClassMsg, _p9),
-								_1: {ctor: '[]'}
+								_0: _mpizenberg$demo_elm_image_annotation$View_Main$exampleText,
+								_1: {
+									ctor: '::',
+									_0: _mpizenberg$demo_elm_image_annotation$View_Main$exampleText2,
+									_1: {ctor: '[]'}
+								}
 							},
-							A2(_mpizenberg$demo_elm_image_annotation$View_ActionBar$viewAll, params.actionBar, tools))),
+							A2(
+								_mdgriffith$style_elements$Element$below,
+								{
+									ctor: '::',
+									_0: A2(_mpizenberg$demo_elm_image_annotation$View_Main$classesSideBar, params.selectClassMsg, _p9),
+									_1: {ctor: '[]'}
+								},
+								A2(_mpizenberg$demo_elm_image_annotation$View_ActionBar$viewAll, params.actionBar, tools)))),
 					_1: {
 						ctor: '::',
 						_0: A3(
