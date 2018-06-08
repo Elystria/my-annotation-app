@@ -18,7 +18,7 @@ import Color
 import Style exposing (StyleSheet)
 import Style.Color as Color
 import Style.Font as Font
-import Element exposing (layout, row, empty, text, link)
+import Element exposing (layout, row, empty, text, link, paragraph)
 
 
 type Style
@@ -50,13 +50,7 @@ type ColorVariations
 type TypeText
     = Title
     | Paragraph
-
-
-
-{--type Attribute
-    = BG
-    | Color
-    | Font --}
+    | Link
 
 
 sheet : StyleSheet Style ColorVariations
@@ -110,7 +104,19 @@ sheet =
             Color.background (Color.rgba 255 255 255 0.8)
                 :: Color.text Color.black
                 :: Font.typeface [ Font.cursive ]
-                :: Font.size 40
+                :: Font.size 20
+                :: preventCommon
+        , Style.style (Instruction Paragraph) <|
+            Color.background (Color.rgba 255 255 255 0.8)
+                :: Color.text (Color.rgba 10 10 10 1)
+                :: Font.typeface [ Font.cursive ]
+                :: Font.size 15
+                :: preventCommon
+        , Style.style (Instruction Link) <|
+            Color.background (Color.rgba 255 255 255 0.8)
+                :: Color.text Color.blue
+                :: Font.typeface [ Font.cursive ]
+                :: Font.size 15
                 :: preventCommon
         ]
 
@@ -147,11 +153,3 @@ noUserSelect =
     , Style.prop "-moz-user-select" "none"
     , Style.prop "-ms-user-select" "none"
     ]
-
-
-
--- Paragraphes formates
-{--paragraph MonPremierStyle []
-        [Element.text "voilà un text",
-        Element.el Bold [] (text) "this is bold"),
-        text "lots of text..."] --}

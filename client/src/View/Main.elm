@@ -20,14 +20,14 @@ import Annotation.Viewer as Viewer exposing (Viewer)
 import Data.AnnotatedImage as AnnotatedImage exposing (AnnotatedImage, Annotations)
 import Data.RawImage as RawImage exposing (RawImage)
 import Data.Tool as Tool exposing (Tool)
-import Element exposing (Element)
-import Element.Attributes as Attributes exposing (alignLeft, alignRight, fill, height, paddingTop)
+import Element exposing (Element, paragraph, button)
+import Element.Attributes as Attributes exposing (alignLeft, alignRight, fill, height, width, paddingTop, spacing)
 import Html exposing (Html)
 import Image exposing (Image)
 import Packages.Device as Device exposing (Device)
 import Packages.StaticTreeMap as StaticTreeMap exposing (StaticTreeMap)
 import Packages.Zipper as Zipper exposing (Zipper)
-import StyleSheet as Style exposing (ColorVariations, Style)
+import StyleSheet as Style exposing (ColorVariations, Style, ButtonState)
 import View.ActionBar as ActionBar
 import View.AnnotationsArea as AnnotationsArea
 import View.ClassesSideBar as ClassesSideBar
@@ -62,7 +62,8 @@ viewImages params viewer images =
         Element.column Style.None
             [ Attributes.height fill ]
             [ ActionBar.viewImages params.actionBar
-                |> Element.below [ datasetRawSideBar params.selectImageMsg images ]
+
+            --|> Element.below [ datasetRawSideBar params.selectImageMsg images ]
             , AnnotationsArea.viewImageOnly viewer (Zipper.getC images)
             ]
 
@@ -77,56 +78,66 @@ viewConfig params tools classes =
             )
 
 
+
+{--viewAll : Parameters msg -> Zipper Tool -> Viewer -> { selected : Int, all : StaticTreeMap String } -> Zipper AnnotatedImage -> Html msg
+viewAll params tools viewer ({ selected, all } as classes) annotatedImages =
+    Element.layout Style.sheet <|
+        Element.column Style.None
+            [ Attributes.height fill ]
+            [ ActionBar.viewAll params.actionBar tools
+                |> Element.below [ exampleText2 ]
+            , AnnotationsArea.view params.annotationsArea viewer (Zipper.getC annotatedImages)
+            ] --}
+
+
 viewAll : Parameters msg -> Zipper Tool -> Viewer -> { selected : Int, all : StaticTreeMap String } -> Zipper AnnotatedImage -> Html msg
 viewAll params tools viewer ({ selected, all } as classes) annotatedImages =
     Element.layout Style.sheet <|
         Element.column Style.None
             [ Attributes.height fill ]
             [ ActionBar.viewAll params.actionBar tools
-                |> Element.below [ classesSideBar params.selectClassMsg classes ]
-                |> Element.below [ exampleText, exampleText2 ]
-                |> Element.below [ datasetAnnotatedSideBar params.selectImageMsg annotatedImages ]
-            , AnnotationsArea.view params.annotationsArea viewer (Zipper.getC annotatedImages)
+            , Element.row Style.None
+                [ Attributes.width fill, Attributes.height fill ]
+                [ instructionText
+                , AnnotationsArea.view params.annotationsArea viewer (Zipper.getC annotatedImages)
+                ]
             ]
 
 
-exampleText : Element Style var msg
+
+{--
+InstructionText =
+    Element.paragraph (Style.Instruction Style.Paragraph)
+        [ width (Attributes.percent 25), paddingTop 10, spacing 10 ]
+        [ Element.column Style.None
+            []
+            [ Element.el (Style.Instruction Style.Title) [] (Element.text "Titre")
+            , Element.el Style.None [] Element.empty
+            , Element.text "blablablablablablablablablablablablablablablablablablabablablablablablab"
+            , Element.newTab "https://google.fr" (Element.el (Style.Instruction Style.Link) [] (Element.text "lien"))
+            ]
+        ]
+
+--}
 
 
+instructionText =
+    Element.paragraph (Style.Instruction Style.Paragraph)
+        [ width (Attributes.percent 25), paddingTop 10, spacing 10, Attributes.yScrollbar ]
+        [ Element.column
+            Style.None
+            [ Attributes.center ]
+            [ Element.el (Style.Instruction Style.Title) [] (Element.text "INSTRUCTIONS\n")
+            , Element.text "\n Please outline the objects in the images. \n To do so, select the outline tool and \n press on the image where you want to \n start outlining.\n Continue pressing while outlining until \n you're done. \n \n"
+            , Element.newTab "https://google.fr" (Element.el (Style.Instruction Style.Link) [] (Element.text "Good outlines examples\n"))
+            , Element.newTab "https://google.fr" (Element.el (Style.Instruction Style.Link) [] (Element.text "Bad outlines examples\n"))
+            , Element.el (Style.Instruction Style.Title) [] (Element.text "\n GUIDELINES\n")
+            , Element.text "\n 1. The whole object has to be inside the\n outline. \n 2. The outline must follow roughly the \n shape of the image\n 3. If there are more than one objects,\n outline only one."
+            , Element.newTab "https://google.fr" (Element.el (Style.Instruction Style.Link) [] (Element.text "Video Tutorial \n"))
 
-{--exampleText =
-    let
-        textConsigne1 =
-            "Insérer le text ici"
-
-        textConsigne2 =
-            " Insérer l'autre texte ici"
-    in
-        Element.text
-            (textConsigne1
-                ++ textConsigne2
-            )
-            |> Element.el (Style.ClassItem Style.NonSelectedClass) [ alignLeft, paddingTop 10 ]
-
-                --}
-
-
-exampleText =
-    let
-        paragraphe =
-            "Ceci est un titre\n"
-    in
-        Element.text paragraphe
-            |> Element.el (Style.Instruction Style.Title) [ alignLeft, paddingTop 10 ]
-
-
-exampleText2 =
-    let
-        paragraphe =
-            "Ceci est un autre titre"
-    in
-        Element.text paragraphe
-            |> Element.el (Style.Instruction Style.Title) [ alignLeft, paddingTop 40 ]
+            --, Element.button Style.None [] (Element.text "hide/expand")
+            ]
+        ]
 
 
 
@@ -172,7 +183,8 @@ pageLayout device =
             )
 
         ( viewerWidth, viewerHeight ) =
-            ( device.size.width |> toFloat
+            ( (device.size.width |> toFloat) * 0.75
+              --ICIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
             , max 0 (toFloat device.size.height - barHeight)
             )
     in

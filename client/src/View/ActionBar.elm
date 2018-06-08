@@ -28,7 +28,6 @@ import Svg exposing (Svg)
 import View.Icon as Icon
 
 
-
 -- TYPES #############################################################
 
 
@@ -84,8 +83,8 @@ emptyView params =
         instruction =
             textButton h False params.exportMsg "Load images →"
     in
-    [ filler, instruction, datasetButton params.loadImagesMsg h ]
-        |> Element.row Style.None []
+        [ filler, instruction, datasetButton params.loadImagesMsg h ]
+            |> Element.row Style.None []
 
 
 viewImages : Parameters msg -> Element Style ColorVariations msg
@@ -100,11 +99,11 @@ viewImages params =
         instruction =
             textButton h False params.exportMsg "Load Json config →"
     in
-    filler
-        :: instruction
-        :: configButton params.loadConfigMsg h
-        :: [ datasetButton params.loadImagesMsg h ]
-        |> Element.row Style.None []
+        filler
+            :: instruction
+            :: configButton params.loadConfigMsg h
+            :: [ datasetButton params.loadImagesMsg h ]
+            |> Element.row Style.None []
 
 
 viewConfig : Parameters msg -> Zipper Tool -> Element Style ColorVariations msg
@@ -130,8 +129,8 @@ viewConfig params tools =
             , datasetButton params.loadImagesMsg h
             ]
     in
-    (toolButtons ++ filler :: configAndDatasetButtons)
-        |> Element.row Style.None []
+        (toolButtons ++ filler :: configAndDatasetButtons)
+            |> Element.row Style.None []
 
 
 viewAll : Parameters msg -> Zipper Tool -> Element Style ColorVariations msg
@@ -158,7 +157,6 @@ viewAll params tools =
         optionsButtons =
             if params.mturkMode then
                 [ textButton h True params.exportMsg "Submit" ]
-
             else
                 [ actionButton h True params.exportMsg "Save annotations" Icon.save
                 , configButton params.loadConfigMsg h
@@ -171,8 +169,8 @@ viewAll params tools =
             , actionButton h True params.zoomFitMsg "Fit zoom to image" Icon.zoomFit
             ]
     in
-    (toolButtons ++ filler :: removeLatestButton :: filler :: zoomActions ++ filler :: optionsButtons)
-        |> Element.row Style.None []
+        (toolButtons ++ filler :: removeLatestButton :: filler :: optionsButtons)
+            |> Element.row Style.None []
 
 
 datasetButton : (List { name : String, file : Value } -> msg) -> Float -> Element Style ColorVariations msg
@@ -205,7 +203,6 @@ toolButton selectToolMsg size isSelected tool =
         { actionability =
             if isSelected then
                 Button.Abled Button.Active
-
             else
                 Button.Abled Button.Inactive
         , action =
@@ -217,7 +214,6 @@ toolButton selectToolMsg size isSelected tool =
         , outerStyle =
             if isSelected then
                 Style.Button Style.Selected
-
             else
                 Style.Button Style.Abled
         , otherAttributes = []
@@ -260,9 +256,9 @@ toolIcon size variant type_ =
                 Tool.Polygon ->
                     ( Icon.polygon, "Polygon" )
     in
-    lazy2 Icon.toHtml size svgIcon
-        |> Element.html
-        |> el Style.ToolIcon [ vary (Style.FromPalette variant) True, toAttr <| Html.Attributes.title tooltipText ]
+        lazy2 Icon.toHtml size svgIcon
+            |> Element.html
+            |> el Style.ToolIcon [ vary (Style.FromPalette variant) True, toAttr <| Html.Attributes.title tooltipText ]
 
 
 actionButton : Float -> Bool -> msg -> String -> List (Svg msg) -> Element Style ColorVariations msg
@@ -271,7 +267,6 @@ actionButton size clickable sendMsg tooltipText innerSvg =
         { actionability =
             if clickable then
                 Button.Abled Button.Inactive
-
             else
                 Button.Disabled
         , action = Pointer.onDown (always sendMsg) |> Attributes.toAttr
@@ -281,7 +276,6 @@ actionButton size clickable sendMsg tooltipText innerSvg =
         , outerStyle =
             if clickable then
                 Style.Button Style.Abled
-
             else
                 Style.Button Style.Disabled
         , otherAttributes = [ toAttr <| Html.Attributes.title tooltipText ]
@@ -294,7 +288,6 @@ textButton height clickable sendMsg innerText =
         { actionability =
             if clickable then
                 Button.Abled Button.Inactive
-
             else
                 Button.Disabled
         , action = Pointer.onDown (always sendMsg) |> Attributes.toAttr
@@ -304,7 +297,6 @@ textButton height clickable sendMsg innerText =
         , outerStyle =
             if clickable then
                 Style.TextButton Style.Abled
-
             else
                 Style.TextButton Style.Disabled
         , otherAttributes = []

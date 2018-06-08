@@ -33083,6 +33083,7 @@ var _mpizenberg$demo_elm_image_annotation$StyleSheet$colorVariations = function 
 		}
 	};
 }();
+var _mpizenberg$demo_elm_image_annotation$StyleSheet$Link = {ctor: 'Link'};
 var _mpizenberg$demo_elm_image_annotation$StyleSheet$Paragraph = {ctor: 'Paragraph'};
 var _mpizenberg$demo_elm_image_annotation$StyleSheet$Title = {ctor: 'Title'};
 var _mpizenberg$demo_elm_image_annotation$StyleSheet$sheet = _mdgriffith$style_elements$Style$styleSheet(
@@ -33258,13 +33259,72 @@ var _mpizenberg$demo_elm_image_annotation$StyleSheet$sheet = _mdgriffith$style_e
 																			}),
 																		_1: {
 																			ctor: '::',
-																			_0: _mdgriffith$style_elements$Style_Font$size(40),
+																			_0: _mdgriffith$style_elements$Style_Font$size(20),
 																			_1: _mpizenberg$demo_elm_image_annotation$StyleSheet$preventCommon
 																		}
 																	}
 																}
 															}),
-														_1: {ctor: '[]'}
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_mdgriffith$style_elements$Style$style,
+																_mpizenberg$demo_elm_image_annotation$StyleSheet$Instruction(_mpizenberg$demo_elm_image_annotation$StyleSheet$Paragraph),
+																{
+																	ctor: '::',
+																	_0: _mdgriffith$style_elements$Style_Color$background(
+																		A4(_elm_lang$core$Color$rgba, 255, 255, 255, 0.8)),
+																	_1: {
+																		ctor: '::',
+																		_0: _mdgriffith$style_elements$Style_Color$text(
+																			A4(_elm_lang$core$Color$rgba, 10, 10, 10, 1)),
+																		_1: {
+																			ctor: '::',
+																			_0: _mdgriffith$style_elements$Style_Font$typeface(
+																				{
+																					ctor: '::',
+																					_0: _mdgriffith$style_elements$Style_Font$cursive,
+																					_1: {ctor: '[]'}
+																				}),
+																			_1: {
+																				ctor: '::',
+																				_0: _mdgriffith$style_elements$Style_Font$size(15),
+																				_1: _mpizenberg$demo_elm_image_annotation$StyleSheet$preventCommon
+																			}
+																		}
+																	}
+																}),
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_mdgriffith$style_elements$Style$style,
+																	_mpizenberg$demo_elm_image_annotation$StyleSheet$Instruction(_mpizenberg$demo_elm_image_annotation$StyleSheet$Link),
+																	{
+																		ctor: '::',
+																		_0: _mdgriffith$style_elements$Style_Color$background(
+																			A4(_elm_lang$core$Color$rgba, 255, 255, 255, 0.8)),
+																		_1: {
+																			ctor: '::',
+																			_0: _mdgriffith$style_elements$Style_Color$text(_elm_lang$core$Color$blue),
+																			_1: {
+																				ctor: '::',
+																				_0: _mdgriffith$style_elements$Style_Font$typeface(
+																					{
+																						ctor: '::',
+																						_0: _mdgriffith$style_elements$Style_Font$cursive,
+																						_1: {ctor: '[]'}
+																					}),
+																				_1: {
+																					ctor: '::',
+																					_0: _mdgriffith$style_elements$Style_Font$size(15),
+																					_1: _mpizenberg$demo_elm_image_annotation$StyleSheet$preventCommon
+																				}
+																			}
+																		}
+																	}),
+																_1: {ctor: '[]'}
+															}
+														}
 													}
 												}
 											}
@@ -34859,14 +34919,7 @@ var _mpizenberg$demo_elm_image_annotation$View_ActionBar$viewAll = F2(
 					_1: {
 						ctor: '::',
 						_0: removeLatestButton,
-						_1: {
-							ctor: '::',
-							_0: filler,
-							_1: A2(
-								_elm_lang$core$Basics_ops['++'],
-								zoomActions,
-								{ctor: '::', _0: filler, _1: optionsButtons})
-						}
+						_1: {ctor: '::', _0: filler, _1: optionsButtons}
 					}
 				}));
 	});
@@ -35724,7 +35777,7 @@ var _mpizenberg$demo_elm_image_annotation$View_Main$pageLayout = function (devic
 	var barHeight = _p2._1;
 	var _p3 = {
 		ctor: '_Tuple2',
-		_0: _elm_lang$core$Basics$toFloat(device.size.width),
+		_0: _elm_lang$core$Basics$toFloat(device.size.width) * 0.75,
 		_1: A2(
 			_elm_lang$core$Basics$max,
 			0,
@@ -35818,38 +35871,97 @@ var _mpizenberg$demo_elm_image_annotation$View_Main$datasetRawSideBar = F2(
 			},
 			A2(_mpizenberg$demo_elm_image_annotation$View_DatasetSideBar$viewRaw, selectImageMsg, images));
 	});
-var _mpizenberg$demo_elm_image_annotation$View_Main$exampleText2 = function () {
-	var paragraphe = 'Ceci est un autre titre';
-	return A3(
-		_mdgriffith$style_elements$Element$el,
-		_mpizenberg$demo_elm_image_annotation$StyleSheet$Instruction(_mpizenberg$demo_elm_image_annotation$StyleSheet$Title),
-		{
+var _mpizenberg$demo_elm_image_annotation$View_Main$instructionText = A3(
+	_mdgriffith$style_elements$Element$paragraph,
+	_mpizenberg$demo_elm_image_annotation$StyleSheet$Instruction(_mpizenberg$demo_elm_image_annotation$StyleSheet$Paragraph),
+	{
+		ctor: '::',
+		_0: _mdgriffith$style_elements$Element_Attributes$width(
+			_mdgriffith$style_elements$Element_Attributes$percent(25)),
+		_1: {
 			ctor: '::',
-			_0: _mdgriffith$style_elements$Element_Attributes$alignLeft,
+			_0: _mdgriffith$style_elements$Element_Attributes$paddingTop(10),
 			_1: {
 				ctor: '::',
-				_0: _mdgriffith$style_elements$Element_Attributes$paddingTop(40),
-				_1: {ctor: '[]'}
+				_0: _mdgriffith$style_elements$Element_Attributes$spacing(10),
+				_1: {
+					ctor: '::',
+					_0: _mdgriffith$style_elements$Element_Attributes$yScrollbar,
+					_1: {ctor: '[]'}
+				}
 			}
-		},
-		_mdgriffith$style_elements$Element$text(paragraphe));
-}();
-var _mpizenberg$demo_elm_image_annotation$View_Main$exampleText = function () {
-	var paragraphe = 'Ceci est un titre\n';
-	return A3(
-		_mdgriffith$style_elements$Element$el,
-		_mpizenberg$demo_elm_image_annotation$StyleSheet$Instruction(_mpizenberg$demo_elm_image_annotation$StyleSheet$Title),
-		{
-			ctor: '::',
-			_0: _mdgriffith$style_elements$Element_Attributes$alignLeft,
-			_1: {
+		}
+	},
+	{
+		ctor: '::',
+		_0: A3(
+			_mdgriffith$style_elements$Element$column,
+			_mpizenberg$demo_elm_image_annotation$StyleSheet$None,
+			{
 				ctor: '::',
-				_0: _mdgriffith$style_elements$Element_Attributes$paddingTop(10),
+				_0: _mdgriffith$style_elements$Element_Attributes$center,
 				_1: {ctor: '[]'}
-			}
-		},
-		_mdgriffith$style_elements$Element$text(paragraphe));
-}();
+			},
+			{
+				ctor: '::',
+				_0: A3(
+					_mdgriffith$style_elements$Element$el,
+					_mpizenberg$demo_elm_image_annotation$StyleSheet$Instruction(_mpizenberg$demo_elm_image_annotation$StyleSheet$Title),
+					{ctor: '[]'},
+					_mdgriffith$style_elements$Element$text('INSTRUCTIONS\n')),
+				_1: {
+					ctor: '::',
+					_0: _mdgriffith$style_elements$Element$text('\n Please outline the objects in the images. \n To do so, select the outline tool and \n press on the image where you want to \n start outlining.\n Continue pressing while outlining until \n you\'re done. \n \n'),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_mdgriffith$style_elements$Element$newTab,
+							'https://google.fr',
+							A3(
+								_mdgriffith$style_elements$Element$el,
+								_mpizenberg$demo_elm_image_annotation$StyleSheet$Instruction(_mpizenberg$demo_elm_image_annotation$StyleSheet$Link),
+								{ctor: '[]'},
+								_mdgriffith$style_elements$Element$text('Good outlines examples\n'))),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_mdgriffith$style_elements$Element$newTab,
+								'https://google.fr',
+								A3(
+									_mdgriffith$style_elements$Element$el,
+									_mpizenberg$demo_elm_image_annotation$StyleSheet$Instruction(_mpizenberg$demo_elm_image_annotation$StyleSheet$Link),
+									{ctor: '[]'},
+									_mdgriffith$style_elements$Element$text('Bad outlines examples\n'))),
+							_1: {
+								ctor: '::',
+								_0: A3(
+									_mdgriffith$style_elements$Element$el,
+									_mpizenberg$demo_elm_image_annotation$StyleSheet$Instruction(_mpizenberg$demo_elm_image_annotation$StyleSheet$Title),
+									{ctor: '[]'},
+									_mdgriffith$style_elements$Element$text('\n GUIDELINES\n')),
+								_1: {
+									ctor: '::',
+									_0: _mdgriffith$style_elements$Element$text('\n 1. The whole object has to be inside the\n outline. \n 2. The outline must follow roughly the \n shape of the image\n 3. If there are more than one objects,\n outline only one.'),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_mdgriffith$style_elements$Element$newTab,
+											'https://google.fr',
+											A3(
+												_mdgriffith$style_elements$Element$el,
+												_mpizenberg$demo_elm_image_annotation$StyleSheet$Instruction(_mpizenberg$demo_elm_image_annotation$StyleSheet$Link),
+												{ctor: '[]'},
+												_mdgriffith$style_elements$Element$text('Video Tutorial \n'))),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					}
+				}
+			}),
+		_1: {ctor: '[]'}
+	});
 var _mpizenberg$demo_elm_image_annotation$View_Main$viewAll = F5(
 	function (params, tools, viewer, _p8, annotatedImages) {
 		var _p9 = _p8;
@@ -35866,39 +35978,34 @@ var _mpizenberg$demo_elm_image_annotation$View_Main$viewAll = F5(
 				},
 				{
 					ctor: '::',
-					_0: A2(
-						_mdgriffith$style_elements$Element$below,
-						{
-							ctor: '::',
-							_0: A2(_mpizenberg$demo_elm_image_annotation$View_Main$datasetAnnotatedSideBar, params.selectImageMsg, annotatedImages),
-							_1: {ctor: '[]'}
-						},
-						A2(
-							_mdgriffith$style_elements$Element$below,
-							{
-								ctor: '::',
-								_0: _mpizenberg$demo_elm_image_annotation$View_Main$exampleText,
-								_1: {
-									ctor: '::',
-									_0: _mpizenberg$demo_elm_image_annotation$View_Main$exampleText2,
-									_1: {ctor: '[]'}
-								}
-							},
-							A2(
-								_mdgriffith$style_elements$Element$below,
-								{
-									ctor: '::',
-									_0: A2(_mpizenberg$demo_elm_image_annotation$View_Main$classesSideBar, params.selectClassMsg, _p9),
-									_1: {ctor: '[]'}
-								},
-								A2(_mpizenberg$demo_elm_image_annotation$View_ActionBar$viewAll, params.actionBar, tools)))),
+					_0: A2(_mpizenberg$demo_elm_image_annotation$View_ActionBar$viewAll, params.actionBar, tools),
 					_1: {
 						ctor: '::',
 						_0: A3(
-							_mpizenberg$demo_elm_image_annotation$View_AnnotationsArea$view,
-							params.annotationsArea,
-							viewer,
-							_mpizenberg$demo_elm_image_annotation$Packages_Zipper$getC(annotatedImages)),
+							_mdgriffith$style_elements$Element$row,
+							_mpizenberg$demo_elm_image_annotation$StyleSheet$None,
+							{
+								ctor: '::',
+								_0: _mdgriffith$style_elements$Element_Attributes$width(_mdgriffith$style_elements$Element_Attributes$fill),
+								_1: {
+									ctor: '::',
+									_0: _mdgriffith$style_elements$Element_Attributes$height(_mdgriffith$style_elements$Element_Attributes$fill),
+									_1: {ctor: '[]'}
+								}
+							},
+							{
+								ctor: '::',
+								_0: _mpizenberg$demo_elm_image_annotation$View_Main$instructionText,
+								_1: {
+									ctor: '::',
+									_0: A3(
+										_mpizenberg$demo_elm_image_annotation$View_AnnotationsArea$view,
+										params.annotationsArea,
+										viewer,
+										_mpizenberg$demo_elm_image_annotation$Packages_Zipper$getC(annotatedImages)),
+									_1: {ctor: '[]'}
+								}
+							}),
 						_1: {ctor: '[]'}
 					}
 				}));
@@ -35940,14 +36047,7 @@ var _mpizenberg$demo_elm_image_annotation$View_Main$viewImages = F3(
 				},
 				{
 					ctor: '::',
-					_0: A2(
-						_mdgriffith$style_elements$Element$below,
-						{
-							ctor: '::',
-							_0: A2(_mpizenberg$demo_elm_image_annotation$View_Main$datasetRawSideBar, params.selectImageMsg, images),
-							_1: {ctor: '[]'}
-						},
-						_mpizenberg$demo_elm_image_annotation$View_ActionBar$viewImages(params.actionBar)),
+					_0: _mpizenberg$demo_elm_image_annotation$View_ActionBar$viewImages(params.actionBar),
 					_1: {
 						ctor: '::',
 						_0: A2(
