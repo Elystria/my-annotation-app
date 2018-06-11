@@ -104,23 +104,6 @@ viewAll params tools viewer ({ selected, all } as classes) annotatedImages =
             ]
 
 
-
-{--
-InstructionText =
-    Element.paragraph (Style.Instruction Style.Paragraph)
-        [ width (Attributes.percent 25), paddingTop 10, spacing 10 ]
-        [ Element.column Style.None
-            []
-            [ Element.el (Style.Instruction Style.Title) [] (Element.text "Titre")
-            , Element.el Style.None [] Element.empty
-            , Element.text "blablablablablablablablablablablablablablablablablablabablablablablablab"
-            , Element.newTab "https://google.fr" (Element.el (Style.Instruction Style.Link) [] (Element.text "lien"))
-            ]
-        ]
-
---}
-
-
 instructionText =
     Element.paragraph (Style.Instruction Style.Paragraph)
         [ width (Attributes.percent 25), paddingTop 10, spacing 10, Attributes.yScrollbar ]
@@ -132,10 +115,8 @@ instructionText =
             , Element.newTab "https://google.fr" (Element.el (Style.Instruction Style.Link) [] (Element.text "Good outlines examples\n"))
             , Element.newTab "https://google.fr" (Element.el (Style.Instruction Style.Link) [] (Element.text "Bad outlines examples\n"))
             , Element.el (Style.Instruction Style.Title) [] (Element.text "\n GUIDELINES\n")
-            , Element.text "\n 1. The whole object has to be inside the\n outline. \n 2. The outline must follow roughly the \n shape of the image\n 3. If there are more than one objects,\n outline only one."
+            , Element.text "\n 1. The whole object has to be inside the\n outline. \n 2. The outline must follow roughly the \n shape of the image\n 3. If there are more than one objects,\n outline only one \n."
             , Element.newTab "https://google.fr" (Element.el (Style.Instruction Style.Link) [] (Element.text "Video Tutorial \n"))
-
-            --, Element.button Style.None [] (Element.text "hide/expand")
             ]
         ]
 

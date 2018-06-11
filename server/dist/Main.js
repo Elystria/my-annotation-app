@@ -35941,7 +35941,7 @@ var _mpizenberg$demo_elm_image_annotation$View_Main$instructionText = A3(
 									_mdgriffith$style_elements$Element$text('\n GUIDELINES\n')),
 								_1: {
 									ctor: '::',
-									_0: _mdgriffith$style_elements$Element$text('\n 1. The whole object has to be inside the\n outline. \n 2. The outline must follow roughly the \n shape of the image\n 3. If there are more than one objects,\n outline only one.'),
+									_0: _mdgriffith$style_elements$Element$text('\n 1. The whole object has to be inside the\n outline. \n 2. The outline must follow roughly the \n shape of the image\n 3. If there are more than one objects,\n outline only one \n.'),
 									_1: {
 										ctor: '::',
 										_0: A2(
